@@ -1,4 +1,4 @@
-import {ApiModule} from "./ApiModule";
+import {NgApiModule} from "./ApiModule";
 import {Component, NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {CommonModule} from "@angular/common";
@@ -21,7 +21,7 @@ export class AppComponent {
     imports     : [
         BrowserModule,
         CommonModule,
-        ApiModule.forRoot('/api')
+        NgApiModule.forRoot('/api')
     ],
     exports     : [AppComponent],
     providers   : [],
