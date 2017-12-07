@@ -2,8 +2,9 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {NgValidationModule} from "@ng-app-framework/validation";
 import {EndpointCaller, EndpointConfig} from "./Service/Impl/index";
 import {Callable, Requestable} from "./Service/Interface/index";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {NgCoreModule} from "@ng-app-framework/core";
+import {HttpProxy} from "./Service";
 
 @NgModule({
     imports  : [
@@ -17,13 +18,14 @@ import {NgCoreModule} from "@ng-app-framework/core";
     providers: [
         EndpointCaller,
         EndpointConfig,
+        HttpProxy,
         {
             provide    : Callable,
             useExisting: EndpointCaller
         },
         {
             provide    : Requestable,
-            useExisting: HttpClient
+            useExisting: HttpProxy
         }
     ]
 })
