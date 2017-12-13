@@ -1,4 +1,4 @@
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs/Rx";
 import {HttpRequest, HttpResponse} from "@angular/common/http";
 
 export abstract class Requestable {

@@ -1,4 +1,4 @@
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs/Rx";
 import {Callable} from "../../src/app/Service/Interface";
 import {EndpointConfig} from "../../src/app/Service/Impl";
 import {HttpResponse} from "@angular/common/http";
