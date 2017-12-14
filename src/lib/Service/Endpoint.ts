@@ -2,13 +2,11 @@ import {Injectable} from "@angular/core";
 import {EndpointValidator} from "./Impl/EndpointValidator";
 import {Observable} from "rxjs/Rx";
 import {EndpointEvents} from "./EndpointEvents";
-import {Callable} from "./Interface/Callable";
-import {EndpointCaller} from "./Impl";
+import {EndpointCaller} from "./Impl/index";
 
 @Injectable()
 export class Endpoint {
 
-    relativeBase: string         = 'api/v2/';
     path: string                 = '';
     validator: EndpointValidator = new EndpointValidator();
 
@@ -71,7 +69,7 @@ export class Endpoint {
     }
 
     getAbsoluteUrl() {
-        return this.endpointCaller.config.baseUri + this.relativeBase + this.path;
+        return this.endpointCaller.config.baseUri + this.path;
     }
 
 

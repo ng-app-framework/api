@@ -1,6 +1,6 @@
 import {Observable} from "rxjs/Rx";
-import {Callable} from "../../src/app/Service/Interface";
-import {EndpointConfig} from "../../src/app/Service/Impl";
+import {Callable} from "../../src/lib/Service/Interface";
+import {EndpointConfig} from "../../src/lib/Service/Impl";
 import {HttpResponse} from "@angular/common/http";
 
 export class EndpointCallerMock implements Callable {

@@ -1,5 +1,5 @@
 import {EndpointCallerShunt} from "../Mock/EndpointCallerShunt";
-import {Endpoint} from "../../src/app/Service";
+import {Endpoint} from "../../src/lib/Service";
 import {AsynchronousDefinition, ObjectValidator, StringValidator} from "@ng-app-framework/validation";
 
 describe('Endpoint', () => {

@@ -1,4 +1,4 @@
-import {RequestBuilder} from "../../src/app/Service";
+import {RequestBuilder} from "../../src/lib/Service";
 import {Value} from "@ng-app-framework/core";
 
 describe('Request Builder', () => {

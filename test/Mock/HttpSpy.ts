@@ -1,5 +1,5 @@
 import {Observable} from "rxjs/Rx";
-import {Requestable} from "../../src/app/Service/Interface/Requestable";
+import {Requestable} from "../../src/lib/Service/Interface/Requestable";
 import {HttpRequest, HttpResponse} from "@angular/common/http";
 
 export interface TestRequest {

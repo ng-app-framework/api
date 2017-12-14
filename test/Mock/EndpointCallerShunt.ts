@@ -1,4 +1,4 @@
-import {EndpointCaller, EndpointConfig} from "../../src/app/Service/Impl";
+import {EndpointCaller, EndpointConfig} from "../../src/lib/Service/Impl";
 import {HttpSpy, MockedResponse} from "./HttpSpy";
 import {HttpRequest} from "@angular/common/http";
 
