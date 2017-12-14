@@ -1,4 +1,4 @@
-import {NgApiModule} from "./NgApiModule";
+import {NgApiModule} from "../lib/NgApiModule";
 import {Component, Injectable, NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {CommonModule} from "@angular/common";
