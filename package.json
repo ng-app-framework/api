@@ -18,6 +18,14 @@
     "dependencies": {
         "@angular/common": "^5.1.3",
         "@angular/core": "^5.1.3",
+        "@ng-app-framework/core": "^1.1.13",
+        "@ng-app-framework/validation": "^1.1.14",
+        "qs": "^6.5.1",
+        "rxjs": "^5.5.6"
+    },
+    "peerDependencies": {
+        "@angular/common": "^5.1.3",
+        "@angular/core": "^5.1.3",
         "@ng-app-framework/core": "^1.1.11",
         "@ng-app-framework/validation": "^1.1.10",
         "qs": "^6.5.1",
@@ -57,7 +65,12 @@
     "$schema": "./node_modules/ng-packagr/package.schema.json",
     "ngPackage": {
         "lib": {
-            "entryFile": "index.ts"
+            "name": "ng-app-api",
+            "entryFile": "index.ts",
+            "externals": {
+                "@ng-app-framework/core": "ng-app-core",
+                "@ng-app-framework/validation": "ng-app-validation"
+            }
         }
     }
 }
