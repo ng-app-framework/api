@@ -1,5 +1,5 @@
 import {StringValue, Value} from "@ng-app-framework/core";
-import * as qs              from "qs";
+import * as qs              from "query-string";
 
 export class RequestBuilder {
 
