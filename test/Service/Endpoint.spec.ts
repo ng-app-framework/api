@@ -1,5 +1,5 @@
-import {EndpointCallerShunt} from "../Mock/EndpointCallerShunt";
-import {Endpoint} from "../../src/lib/Service";
+import {EndpointCallerShunt}                                      from "../Mock/EndpointCallerShunt";
+import {Endpoint}                                                 from "../../src/lib/Service";
 import {AsynchronousDefinition, ObjectValidator, StringValidator} from "@ng-app-framework/validation";
 
 describe('Endpoint', () => {
@@ -9,11 +9,13 @@ describe('Endpoint', () => {
     let subscriptions                       = {
         onApiSuccess       : null,
         onValidationSuccess: null,
+        onValidationFailure: null,
         onApiFailure       : null
     };
     let eventsCalled                        = {
         onApiSuccess       : 0,
         onValidationSuccess: 0,
+        onValidationFailure: 0,
         onApiFailure       : 0
     };
     beforeEach(() => {
@@ -33,15 +35,18 @@ describe('Endpoint', () => {
         eventsCalled                      = {
             onApiSuccess       : 0,
             onValidationSuccess: 0,
+            onValidationFailure: 0,
             onApiFailure       : 0
         };
         subscriptions.onApiSuccess        = endpoint.events.onApiSuccess.first().subscribe(() => eventsCalled.onApiSuccess++);
-        subscriptions.onValidationSuccess = endpoint.events.onValidationSuccess.take(2).subscribe(() => eventsCalled.onValidationSuccess++);
+        subscriptions.onValidationSuccess = endpoint.events.onValidationSuccess.subscribe(() => eventsCalled.onValidationSuccess++);
+        subscriptions.onValidationFailure = endpoint.events.onValidationFailure.subscribe(() => eventsCalled.onValidationFailure++)
         subscriptions.onApiFailure        = endpoint.events.onApiFailure.first().subscribe(() => eventsCalled.onApiFailure++);
     });
     afterEach(() => {
         subscriptions.onApiSuccess.unsubscribe();
         subscriptions.onValidationSuccess.unsubscribe();
+        subscriptions.onValidationFailure.unsubscribe();
         subscriptions.onApiFailure.unsubscribe();
     });
     it('should return an error if an exception is thrown during the request', (done) => {
@@ -52,11 +57,12 @@ describe('Endpoint', () => {
             let observable           = endpoint.request('get', {
                 willFail: true
             }).subscribe({
-                next : () => {
+                next : (value) => {
                     expect('Should have failed').toBeFalsy();
                     done();
                 },
                 error: (error) => {
+                    console.log(eventsCalled);
                     expect(error).toBeTruthy();
                     done();
                 }
@@ -78,6 +84,7 @@ describe('Endpoint', () => {
                     done();
                 },
                 error: (error) => {
+                    console.log(eventsCalled);
                     expect(error).toBeTruthy();
                     done();
                 }

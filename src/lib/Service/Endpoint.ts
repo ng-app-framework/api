@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
+import {Injectable}        from "@angular/core";
 import {EndpointValidator} from "./Impl/EndpointValidator";
-import {Observable} from "rxjs/Rx";
-import {EndpointEvents} from "./EndpointEvents";
-import {EndpointCaller} from "./Impl/index";
+import {Observable}        from "rxjs/Rx";
+import {EndpointEvents}    from "./EndpointEvents";
+import {EndpointCaller}    from "./Impl/index";
 
 @Injectable()
 export class Endpoint {
@@ -19,16 +19,20 @@ export class Endpoint {
 
     public request(method: string, requestData: any = {}) {
         return this.validator
-            .validateRequest(requestData)
-            .catch((err, caught) => this.onValidationFailure('request', err, caught))
-            .concat(this.onRequestValidationSuccess())
-            .concat(this.continueWithRequest(method, requestData))
-            .catch((err, caught) => this.onApiRequestFailure(err, caught))
-            .map(response => this.onApiRequestSuccess(response))
-            .map(response => this.transformResponse(response))
-            .flatMap(transformedResponse => this.validator.validateResponse(transformedResponse))
-            .catch((err, caught) => this.onValidationFailure('response', err, caught))
-            .map(transformedResponse => this.onResponseSuccess(transformedResponse));
+                   .validateRequest(requestData)
+                   .catch((err, caught) => this.onValidationFailure('request', err, caught))
+                   .concat(this.onRequestValidationSuccess())
+                   .concat(
+                       this.continueWithRequest(method, requestData)
+                           .catch((err, caught) => this.onApiRequestFailure(err, caught))
+                   )
+                   .map(response => this.onRequestSuccess(response))
+                   .map(response => this.transformResponse(response))
+                   .flatMap(transformedResponse =>
+                       this.validator.validateResponse(transformedResponse)
+                           .catch((err, caught) => this.onValidationFailure('response', err, caught))
+                   )
+                   .map(transformedResponse => this.onResponseSuccess(transformedResponse));
     }
 
     private continueWithRequest(method: string, requestData: any) {
@@ -41,7 +45,7 @@ export class Endpoint {
         return transformedResponse;
     }
 
-    private onApiRequestSuccess(transformed: any) {
+    private onRequestSuccess(transformed: any) {
         this.events.onApiSuccess.emit(transformed);
         return transformed;
     }
@@ -58,7 +62,7 @@ export class Endpoint {
         });
     }
 
-    private onValidationFailure(location: 'request' | 'response', err, caught) {
+    private onValidationFailure(location: 'request' | 'response', err: Error, caught) {
         this.events.onValidationFailure.emit({location, content: err});
         this.events.onFailure.emit(err);
         return Observable.throw(err);
