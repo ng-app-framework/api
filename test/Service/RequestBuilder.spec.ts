@@ -78,7 +78,7 @@ describe('Request Builder', () => {
         }
 
         it('should add a query string', () => {
-            assertGetUrlResult('/test/url', {test: 'success'}, '/test/url?test=success');
+            assertGetUrlResult('/test/url', {test: 'success', nested: {field: 'match'}}, '/test/url?test=success&nested%5Bfield%5D=match');
         });
         it('should append a query string', () => {
             assertGetUrlResult('/test/url?already=queryStringed', {test: 'success'}, '/test/url?already=queryStringed&test=success');

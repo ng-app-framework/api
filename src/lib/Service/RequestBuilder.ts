@@ -1,5 +1,5 @@
 import {StringValue, Value} from "@ng-app-framework/core";
-import * as qs              from "query-string";
+import * as qs              from "qs";
 
 export class RequestBuilder {
 
@@ -33,7 +33,7 @@ export class RequestBuilder {
             if (url.indexOf('?') !== -1) {
                 delimiter = '&';
             }
-            return url + delimiter + qs.stringify(data);
+            return url + delimiter + queryStringData;
         }
         return url;
     }
