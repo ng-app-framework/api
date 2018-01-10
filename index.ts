@@ -1,3 +1,4 @@
+export * from "./src/lib/NgApiModule";
 export * from "./src/lib/Service/Interface/Callable";
 export * from "./src/lib/Service/Interface/Requestable";
 export * from "./src/lib/Service/Impl/EndpointCaller";
