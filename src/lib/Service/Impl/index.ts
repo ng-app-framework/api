@@ -1,3 +1,3 @@
-export *                from "./EndpointCaller";
-export *                from "./EndpointValidator";
-export {EndpointConfig} from "./EndpointConfig";
+export * from "./EndpointCaller";
+export * from "./EndpointValidator";
+export * from "./EndpointConfig";
