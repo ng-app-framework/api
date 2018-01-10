@@ -1,15 +1,11 @@
-import {Injectable, Optional, EventEmitter} from "@angular/core";
-import {Observable} from "rxjs/Rx";
-import {RequestBuilder} from "../RequestBuilder";
-import {Requestable} from "../Interface/Requestable";
-import {Value} from "@ng-app-framework/core";
-import {Callable} from "../Interface/Callable";
-import {HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
-
-@Injectable()
-export class EndpointConfig {
-    baseUri: string = '';
-}
+import {HttpRequest, HttpResponse}          from "@angular/common/http";
+import {EventEmitter, Injectable, Optional} from "@angular/core";
+import {Value}                              from "@ng-app-framework/core";
+import {Observable}                         from "rxjs/Rx";
+import {Callable}                           from "../Interface/Callable";
+import {Requestable}                        from "../Interface/Requestable";
+import {RequestBuilder}                     from "../RequestBuilder";
+import {EndpointConfig}                     from "./EndpointConfig";
 
 @Injectable()
 export class EndpointCaller implements Callable {
