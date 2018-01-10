@@ -1,4 +1,5 @@
-import {EndpointValidator} from "../../src/lib/Service/Impl";
+import {EndpointValidator} from "../../src/lib/Service/Impl/EndpointValidator";
+
 
 describe('Module: Api', () => {
     describe('Class: EndpointValidator', () => {

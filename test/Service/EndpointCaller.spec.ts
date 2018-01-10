@@ -1,5 +1,5 @@
-import {Observable} from "rxjs/Rx";
-import {EndpointCaller, EndpointConfig} from "../../src/lib/Service/Impl";
+import {Observable}          from "rxjs/Rx";
+import {EndpointConfig}      from "../../src/lib/Service/Impl/EndpointConfig";
 import {EndpointCallerShunt} from "../Mock/EndpointCallerShunt";
 
 describe('EndpointCaller', () => {

@@ -1,5 +1,5 @@
 import {MockedResponse} from "./HttpSpy";
-import {Endpoint} from "../../src/lib/Service";
+import {Endpoint} from "../../src/lib/Service/Endpoint";
 import {HttpRequest} from "@angular/common/http";
 
 export abstract class EndpointMocker {

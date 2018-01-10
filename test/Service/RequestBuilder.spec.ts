@@ -1,5 +1,5 @@
-import {RequestBuilder} from "../../src/lib/Service";
-import {Value} from "@ng-app-framework/core";
+import {Value}          from "@ng-app-framework/core";
+import {RequestBuilder} from "../../src/lib/Service/RequestBuilder";
 
 describe('Request Builder', () => {
 
@@ -98,7 +98,7 @@ describe('Request Builder', () => {
             assertPopulateResult('/test/:me/again/:me', {me: 'word'}, '/test/word/again/word');
         });
         it('should not add a non-scalar value to a url', () => {
-            assertPopulateResult('/test/:me', {me: {should:'not be added'}}, '/test/:me');
+            assertPopulateResult('/test/:me', {me: {should: 'not be added'}}, '/test/:me');
         });
     });
 });

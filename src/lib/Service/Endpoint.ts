@@ -1,8 +1,8 @@
 import {Injectable}        from "@angular/core";
+import {EndpointCaller}    from "./Impl/EndpointCaller";
 import {EndpointValidator} from "./Impl/EndpointValidator";
 import {Observable}        from "rxjs/Rx";
 import {EndpointEvents}    from "./EndpointEvents";
-import {EndpointCaller}    from "./Impl/index";
 
 @Injectable()
 export class Endpoint {

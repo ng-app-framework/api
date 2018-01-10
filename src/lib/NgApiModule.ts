@@ -1,10 +1,12 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
-import {NgValidationModule} from "@ng-app-framework/validation";
-import {EndpointCaller, EndpointConfig} from "./Service/Impl/index";
-import {Callable, Requestable} from "./Service/Interface/index";
-import {HttpClientModule} from "@angular/common/http";
-import {NgCoreModule} from "@ng-app-framework/core";
-import {HttpProxy} from "./Service";
+import {NgValidationModule}            from "@ng-app-framework/validation";
+import {HttpClientModule}              from "@angular/common/http";
+import {NgCoreModule}                  from "@ng-app-framework/core";
+import {HttpProxy}                     from "./Service/HttpProxy";
+import {EndpointCaller}                from "./Service/Impl/EndpointCaller";
+import {EndpointConfig}                from "./Service/Impl/EndpointConfig";
+import {Callable}                      from "./Service/Interface/Callable";
+import {Requestable}                   from "./Service/Interface/Requestable";
 
 @NgModule({
     imports  : [

@@ -1,6 +1,7 @@
-import {EndpointCaller, EndpointConfig} from "../../src/lib/Service/Impl";
+import {EndpointCaller}          from "../../src/lib/Service/Impl/EndpointCaller";
+import {EndpointConfig}          from "../../src/lib/Service/Impl/EndpointConfig";
 import {HttpSpy, MockedResponse} from "./HttpSpy";
-import {HttpRequest} from "@angular/common/http";
+import {HttpRequest}             from "@angular/common/http";
 
 export class EndpointCallerShunt extends EndpointCaller {
 

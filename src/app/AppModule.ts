@@ -1,9 +1,9 @@
-import {NgApiModule} from "../lib/NgApiModule";
+import {NgApiModule}                     from "../lib/NgApiModule";
 import {Component, Injectable, NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
-import {CommonModule} from "@angular/common";
-import {Endpoint} from "../lib/Service";
-import {EndpointCaller} from "../lib/Service/Impl";
+import {BrowserModule}                   from "@angular/platform-browser";
+import {CommonModule}                    from "@angular/common";
+import {Endpoint}                        from "../lib/Service/Endpoint";
+import {EndpointCaller}                  from "../lib/Service/Impl/EndpointCaller";
 
 @Injectable()
 export class TestEndpoint extends Endpoint {
