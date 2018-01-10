@@ -1,5 +1,5 @@
 import {HttpRequest, HttpResponse}          from "@angular/common/http";
-import {EventEmitter, Injectable, Optional} from "@angular/core";
+import {EventEmitter, Injectable, Optional, Inject, forwardRef} from "@angular/core";
 import {Value}                              from "@ng-app-framework/core";
 import {Observable}                         from "rxjs/Rx";
 import {Callable}                           from "../Interface/Callable";
@@ -16,7 +16,8 @@ export class EndpointCaller implements Callable {
     onApiStart  = new EventEmitter<any>();
     onApiFinish = new EventEmitter<any>();
 
-    constructor(public http: Requestable, @Optional() public config: EndpointConfig = {baseUri: ''}) {
+    constructor(@Inject(forwardRef(() => Requestable)) public http: Requestable,
+        @Inject(forwardRef(() => EndpointConfig)) @Optional() public config: EndpointConfig = {baseUri: ''}) {
     }
 
     public call(absoluteUrl: string, method: string, requestData: any = {}): Observable<HttpResponse<any> | any> {
