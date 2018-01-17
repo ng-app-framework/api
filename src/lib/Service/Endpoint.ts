@@ -7,6 +7,7 @@ import {EndpointEvents}    from "./EndpointEvents";
 @Injectable()
 export class Endpoint {
 
+    customBaseUri: string        = '';
     path: string                 = '';
     validator: EndpointValidator = new EndpointValidator();
 
@@ -73,7 +74,7 @@ export class Endpoint {
     }
 
     getAbsoluteUrl() {
-        return this.endpointCaller.config.baseUri + this.path;
+        return (this.customBaseUri.length > 0 ? this.customBaseUri : this.endpointCaller.config.baseUri) + this.path;
     }
 
 
