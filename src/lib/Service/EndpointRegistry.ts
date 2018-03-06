@@ -12,7 +12,7 @@ export class EndpointRegistry {
         this.listChange.emit(this.list);
     }
 
-    getOrganizedList() {
+    static getOrganizedList() {
         let modules = {};
         for (let endpoint of EndpointRegistry.list) {
             if (!modules[endpoint.module]) {
