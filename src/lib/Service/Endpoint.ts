@@ -1,4 +1,5 @@
 import {Injectable}        from "@angular/core";
+import {EndpointRegistry}  from "./EndpointRegistry";
 import {EndpointCaller}    from "./Impl/EndpointCaller";
 import {EndpointValidator} from "./Impl/EndpointValidator";
 import {Observable}        from "rxjs/Rx";
@@ -16,6 +17,7 @@ export class Endpoint {
     events = new EndpointEvents();
 
     constructor(public endpointCaller: EndpointCaller) {
+        EndpointRegistry.register(this);
     }
 
     public request(method: string, requestData: any = {}) {

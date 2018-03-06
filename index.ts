@@ -5,6 +5,7 @@ export * from "./src/lib/Service/Impl/EndpointCaller";
 export * from "./src/lib/Service/Impl/EndpointValidator";
 export * from "./src/lib/Service/Impl/EndpointConfig";
 export * from "./src/lib/Service/Endpoint";
+export * from "./src/lib/Service/EndpointRegistry";
 export * from "./src/lib/Service/EndpointEvents";
 export * from "./src/lib/Service/HttpProxy";
 export * from "./src/lib/Service/RequestBuilder";
