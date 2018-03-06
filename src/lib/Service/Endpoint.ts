@@ -21,6 +21,7 @@ export interface EndpointDocumentation {
 @Injectable()
 export class Endpoint {
 
+    module                       = 'Api';
     customBaseUri: string        = '';
     path: string                 = '';
     validator: EndpointValidator = new EndpointValidator();
@@ -29,8 +30,7 @@ export class Endpoint {
 
     events = new EndpointEvents();
 
-    documentation:EndpointDocumentation[];
-
+    documentation: EndpointDocumentation[];
 
 
     constructor(public endpointCaller: EndpointCaller) {
