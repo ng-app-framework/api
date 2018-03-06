@@ -15,7 +15,8 @@ export interface EndpointDocumentation {
     method: 'get' | 'post' | 'put' | 'delete';
     name: string;
     arguments: EndpointArgument[];
-    response?: any
+    request?: any;
+    response?: any;
 }
 
 @Injectable()
