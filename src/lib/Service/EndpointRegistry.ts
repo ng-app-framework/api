@@ -1,11 +1,15 @@
-import {Endpoint} from "./Endpoint";
+import {EventEmitter} from "@angular/core";
+import {Endpoint}     from "./Endpoint";
 
 export class EndpointRegistry {
 
     static list = [];
 
+    static listChange = new EventEmitter<any>();
+
     static register(endpoint: Endpoint) {
         this.list.push(endpoint);
+        this.listChange.emit(this.list);
     }
 
     getOrganizedList() {
