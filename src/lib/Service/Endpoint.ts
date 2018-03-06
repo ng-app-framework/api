@@ -28,7 +28,7 @@ export class Endpoint {
 
     events = new EndpointEvents();
 
-    documentation:EndpointDocumentation;
+    documentation:EndpointDocumentation[];
 
 
 
