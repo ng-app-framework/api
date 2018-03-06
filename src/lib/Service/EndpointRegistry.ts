@@ -2,9 +2,12 @@ import {Endpoint} from "./Endpoint";
 
 export class EndpointRegistry {
 
-    static list = [];
+    static list = {};
 
     static register(endpoint:Endpoint) {
-        this.list.push(endpoint);
+        if (this.list[endpoint.module] === undefined) {
+            this.list[endpoint.module] = [];
+        }
+        this.list[endpoint.module].push(endpoint);
     }
 }
