@@ -5,6 +5,18 @@ import {EndpointValidator} from "./Impl/EndpointValidator";
 import {Observable}        from "rxjs/Rx";
 import {EndpointEvents}    from "./EndpointEvents";
 
+export interface EndpointArgument {
+    name: string;
+    type: string;
+    required: boolean;
+}
+
+export interface EndpointDocumentation {
+    method: 'get' | 'post' | 'put' | 'delete';
+    name: string;
+    arguments: EndpointArgument[];
+}
+
 @Injectable()
 export class Endpoint {
 
@@ -15,6 +27,10 @@ export class Endpoint {
     metadata: any = {};
 
     events = new EndpointEvents();
+
+    documentation:EndpointDocumentation;
+
+
 
     constructor(public endpointCaller: EndpointCaller) {
         EndpointRegistry.register(this);
