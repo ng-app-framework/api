@@ -11,11 +11,6 @@ export class HttpProxy implements Requestable {
     }
 
     public request(request: HttpRequest<any>): Observable<HttpResponse<any> | any> {
-        return this.http.request<any>(request.method, request.url, {
-            body   : request.body,
-            headers: request.headers,
-            observe: 'response',
-            params : request.params
-        });
+        return this.http.request<any>(request);
     }
 }
