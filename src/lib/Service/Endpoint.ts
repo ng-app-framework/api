@@ -57,7 +57,7 @@ export class Endpoint {
     }
 
     private continueWithRequest(method: string, requestData: any) {
-        return this.endpointCaller.call(this.getAbsoluteUrl(), method, Object.assign(requestData, this.metadata));
+        return this.endpointCaller.call(this.getAbsoluteUrl(), method, requestData);
     }
 
     private onResponseSuccess(transformedResponse) {
