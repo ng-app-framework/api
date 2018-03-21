@@ -71,7 +71,7 @@ export class Endpoint {
         return transformed;
     }
 
-    private onApiRequestFailure(err, caught) {
+    private onApiRequestFailure(err, caught) {``
         this.events.onApiFailure.emit(err);
         return Observable.throw(err);
     }

@@ -2,6 +2,7 @@ import {HttpRequest, HttpResponse}          from "@angular/common/http";
 import {EventEmitter, Injectable, Optional} from "@angular/core";
 import {Value}                              from "@ng-app-framework/core";
 import {Observable}                         from "rxjs/Rx";
+import {HeaderLoader}                       from "../HeaderLoader";
 import {Callable}                           from "../Interface/Callable";
 import {Requestable}                        from "../Interface/Requestable";
 import {RequestBuilder}                     from "../RequestBuilder";
@@ -47,6 +48,7 @@ export class EndpointCaller implements Callable {
     }
 
     protected getObjectFromResponse(response: HttpResponse<any>): any {
+        HeaderLoader.load(response);
         if (Value.hasKey(response || {}, 'body') && Value.isProvided(response.body)) {
             return response.body
         }
