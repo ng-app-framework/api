@@ -8,11 +8,14 @@ export class HeaderLoader {
 
         for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
             response.body.data = response.body.data || {};
-            if (response.body.data[HeaderLoader.headerMap[headerConstant]]) {
-                response.body.data[HeaderLoader.headerMap[headerConstant]] = this.getHeader(response, headerConstant) || response.body.data[HeaderLoader.headerMap[headerConstant]];
-                continue;
+            let header         = this.getHeader(response, headerConstant);
+            if (header !== null) {
+                if (response.body.data[HeaderLoader.headerMap[headerConstant]]) {
+                    response.body.data[HeaderLoader.headerMap[headerConstant]] = header || response.body.data[HeaderLoader.headerMap[headerConstant]];
+                    continue;
+                }
+                response.body.data[HeaderLoader.headerMap[headerConstant]] = header;
             }
-            response.body.data[HeaderLoader.headerMap[headerConstant]] = this.getHeader(response, headerConstant);
         }
         return response;
     }
