@@ -1,20 +1,21 @@
-import {HttpResponse} from "@angular/common/http";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 
 export class HeaderLoader {
 
     static headerMap: { [key: string]: string } = {};
 
-    static load(response: HttpResponse<any>) {
+    static load(response: HttpResponse<any> | HttpErrorResponse) {
 
         for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
-            response.body.data = response.body.data || {};
-            let header         = this.getHeader(response, headerConstant);
+            let body   = response['body'] || response['error'];
+            body.data  = body.data || {};
+            let header = this.getHeader(response, headerConstant);
             if (header !== null) {
-                if (response.body.data[HeaderLoader.headerMap[headerConstant]]) {
-                    response.body.data[HeaderLoader.headerMap[headerConstant]] = header || response.body.data[HeaderLoader.headerMap[headerConstant]];
+                if (body.data[HeaderLoader.headerMap[headerConstant]]) {
+                    body.data[HeaderLoader.headerMap[headerConstant]] = header || body.data[HeaderLoader.headerMap[headerConstant]];
                     continue;
                 }
-                response.body.data[HeaderLoader.headerMap[headerConstant]] = header;
+                body.data[HeaderLoader.headerMap[headerConstant]] = header;
             }
         }
         return response;

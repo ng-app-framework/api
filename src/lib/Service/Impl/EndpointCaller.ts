@@ -35,11 +35,15 @@ export class EndpointCaller implements Callable {
     protected execute(request: HttpRequest<any>): Observable<HttpResponse<any>> {
         this.onApiStart.emit();
         return this.http.request(request)
-            .finally(() => {
-                this.onApiFinish.emit();
-            })
-            .last()
-            .flatMap((response: HttpResponse<any>) => this.map(response));
+                   .finally(() => {
+                       this.onApiFinish.emit();
+                   })
+                   .last()
+                   .catch((err, caught) => {
+                       HeaderLoader.load(err);
+                       Observable.throw(err);
+                   })
+                   .flatMap((response: HttpResponse<any>) => this.map(response));
     }
 
     protected map(response: HttpResponse<any>): Observable<any> {
