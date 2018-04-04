@@ -41,7 +41,7 @@ export class EndpointCaller implements Callable {
                    .last()
                    .catch((err, caught) => {
                        HeaderLoader.load(err);
-                       Observable.throw(err);
+                       return Observable.throw(err);
                    })
                    .flatMap((response: HttpResponse<any>) => this.map(response));
     }
