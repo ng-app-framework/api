@@ -92,13 +92,13 @@ describe('Request Builder', () => {
         }
 
         it('should swap placeholder text with properties of the data provided', () => {
-            assertPopulateResult('/test/me/:value', {value: 'word'}, '/test/me/word');
+            assertPopulateResult('/test/me/:value', {':value': 'word'}, '/test/me/word');
         });
         it('should replace all instances of the text', () => {
-            assertPopulateResult('/test/:me/again/:me', {me: 'word'}, '/test/word/again/word');
+            assertPopulateResult('/test/:me/again/:me', {':me': 'word'}, '/test/word/again/word');
         });
         it('should not add a non-scalar value to a url', () => {
-            assertPopulateResult('/test/:me', {me: {should: 'not be added'}}, '/test/:me');
+            assertPopulateResult('/test/:me', {':me': {should: 'not be added'}}, '/test/:me');
         });
     });
 });

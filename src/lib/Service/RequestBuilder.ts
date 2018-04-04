@@ -41,8 +41,9 @@ export class RequestBuilder {
     static populateValuesInUrl(url: string, data: { [key: string]: any }): string {
         let formatted = url;
         for (let key in data) {
-            if (Value.isScalar(data[key])) {
-                formatted = StringValue.replace(formatted, `:${key}`, data[key].toString());
+            if (Value.isScalar(data[key]) && key.indexOf(':') === 0) {
+                formatted = StringValue.replace(formatted, `${key}`, data[key].toString());
+                delete data[key];
             }
         }
         return formatted;
