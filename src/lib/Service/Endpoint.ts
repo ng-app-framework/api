@@ -110,7 +110,7 @@ export class Endpoint {
         for (let toReplace in this.placeholders) {
             if (this.placeholders.hasOwnProperty(toReplace) && this.placeholders[toReplace].hasOwnProperty('key')) {
                 if (requestData.hasOwnProperty(this.placeholders[toReplace].key)) {
-                    path = path.replace(toReplace, requestData[this.placeholders[toReplace].key]);
+                    path = path.replace(':' + toReplace, requestData[this.placeholders[toReplace].key]);
                     if (this.placeholders[toReplace].remove) {
                         delete requestData[this.placeholders[toReplace].key];
                     }
