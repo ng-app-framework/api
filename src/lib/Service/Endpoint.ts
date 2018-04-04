@@ -33,6 +33,13 @@ export class Endpoint {
 
     documentation: EndpointDocumentation[];
 
+    placeholders: {
+        [key: string]: {
+            key: string,
+            remove: boolean
+        }
+    } = {};
+
 
     constructor(public endpointCaller: EndpointCaller) {
         EndpointRegistry.register(this);
@@ -57,7 +64,7 @@ export class Endpoint {
     }
 
     private continueWithRequest(method: string, requestData: any) {
-        return this.endpointCaller.call(this.getAbsoluteUrl(), method, requestData);
+        return this.endpointCaller.call(this.getAbsoluteUrl(requestData), method, requestData);
     }
 
     private onResponseSuccess(transformedResponse) {
@@ -71,7 +78,7 @@ export class Endpoint {
         return transformed;
     }
 
-    private onApiRequestFailure(err, caught) {``
+    private onApiRequestFailure(err, caught) {
         this.events.onApiFailure.emit(err);
         return Observable.throw(err);
     }
@@ -93,9 +100,23 @@ export class Endpoint {
         return response;
     }
 
-    getAbsoluteUrl() {
-        return (this.customBaseUri.length > 0 ? this.customBaseUri : this.endpointCaller.config.baseUri) + this.path;
+    getAbsoluteUrl(requestData: any) {
+        return (this.customBaseUri.length > 0 ? this.customBaseUri : this.endpointCaller.config.baseUri) + this.getReplacedPath(requestData);
     }
 
 
+    protected getReplacedPath(requestData: any) {
+        let path = this.path;
+        for (let toReplace in this.placeholders) {
+            if (this.placeholders.hasOwnProperty(toReplace) && this.placeholders[toReplace].hasOwnProperty('key')) {
+                if (requestData.hasOwnProperty(this.placeholders[toReplace].key)) {
+                    path = path.replace(toReplace, requestData[this.placeholders[toReplace].key]);
+                    if (this.placeholders[toReplace].remove) {
+                        delete requestData[this.placeholders[toReplace].key];
+                    }
+                }
+            }
+        }
+        return path;
+    }
 }
