@@ -4,18 +4,32 @@ export class HeaderLoader {
 
     static headerMap: { [key: string]: string } = {};
 
-    static load(response: HttpResponse<any> | HttpErrorResponse) {
+    static load(response: HttpResponse<any>) {
 
         for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
-            let body   = response['body'] || response['error'];
-            body.data  = body.data || {};
-            let header = this.getHeader(response, headerConstant);
+            response.body.data = response.body.data || {};
+            let header         = this.getHeader(response, headerConstant);
             if (header !== null) {
-                if (body.data[HeaderLoader.headerMap[headerConstant]]) {
-                    body.data[HeaderLoader.headerMap[headerConstant]] = header || body.data[HeaderLoader.headerMap[headerConstant]];
+                if (response.body.data[HeaderLoader.headerMap[headerConstant]]) {
+                    response.body.data[HeaderLoader.headerMap[headerConstant]] = header || response.body.data[HeaderLoader.headerMap[headerConstant]];
                     continue;
                 }
-                body.data[HeaderLoader.headerMap[headerConstant]] = header;
+                response.body.data[HeaderLoader.headerMap[headerConstant]] = header;
+            }
+        }
+        return response;
+    }
+
+    static loadFromError(response: HttpErrorResponse) {
+        for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
+            response.error.data = response.error.data || {};
+            let header         = this.getHeader(response, headerConstant);
+            if (header !== null) {
+                if (response.error.data[HeaderLoader.headerMap[headerConstant]]) {
+                    response.error.data[HeaderLoader.headerMap[headerConstant]] = header || response.error.data[HeaderLoader.headerMap[headerConstant]];
+                    continue;
+                }
+                response.error.data[HeaderLoader.headerMap[headerConstant]] = header;
             }
         }
         return response;

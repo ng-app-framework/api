@@ -38,11 +38,10 @@ export class EndpointCaller implements Callable {
                    .finally(() => {
                        this.onApiFinish.emit();
                    })
-                   .last()
                    .catch((err, caught) => {
-                       HeaderLoader.load(err);
-                       return Observable.throw(err);
+                       return Observable.throw(HeaderLoader.loadFromError(err));
                    })
+                   .last()
                    .flatMap((response: HttpResponse<any>) => this.map(response));
     }
 
