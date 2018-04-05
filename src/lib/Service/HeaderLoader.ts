@@ -6,30 +6,34 @@ export class HeaderLoader {
 
     static load(response: HttpResponse<any>) {
 
-        for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
+        if (response.body instanceof Object) {
             response.body.data = response.body.data || {};
-            let header         = this.getHeader(response, headerConstant);
-            if (header !== null) {
-                if (response.body.data[HeaderLoader.headerMap[headerConstant]]) {
-                    response.body.data[HeaderLoader.headerMap[headerConstant]] = header || response.body.data[HeaderLoader.headerMap[headerConstant]];
-                    continue;
+            for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
+                let header = this.getHeader(response, headerConstant);
+                if (header !== null) {
+                    if (response.body.data[HeaderLoader.headerMap[headerConstant]]) {
+                        response.body.data[HeaderLoader.headerMap[headerConstant]] = header || response.body.data[HeaderLoader.headerMap[headerConstant]];
+                        continue;
+                    }
+                    response.body.data[HeaderLoader.headerMap[headerConstant]] = header;
                 }
-                response.body.data[HeaderLoader.headerMap[headerConstant]] = header;
             }
         }
         return response;
     }
 
     static loadFromError(response: HttpErrorResponse) {
-        for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
+        if (response.error instanceof Object) {
             response.error.data = response.error.data || {};
-            let header         = this.getHeader(response, headerConstant);
-            if (header !== null) {
-                if (response.error.data[HeaderLoader.headerMap[headerConstant]]) {
-                    response.error.data[HeaderLoader.headerMap[headerConstant]] = header || response.error.data[HeaderLoader.headerMap[headerConstant]];
-                    continue;
+            for (let headerConstant of Object.keys(HeaderLoader.headerMap)) {
+                let header = this.getHeader(response, headerConstant);
+                if (header !== null) {
+                    if (response.error.data[HeaderLoader.headerMap[headerConstant]]) {
+                        response.error.data[HeaderLoader.headerMap[headerConstant]] = header || response.error.data[HeaderLoader.headerMap[headerConstant]];
+                        continue;
+                    }
+                    response.error.data[HeaderLoader.headerMap[headerConstant]] = header;
                 }
-                response.error.data[HeaderLoader.headerMap[headerConstant]] = header;
             }
         }
         return response;
